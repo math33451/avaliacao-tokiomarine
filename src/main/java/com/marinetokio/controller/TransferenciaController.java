@@ -1,6 +1,7 @@
 package com.marinetokio.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.marinetokio.dto.TransferenciaDto;
 import com.marinetokio.model.Transferencia;
 import com.marinetokio.repository.TransferenciaRepository;
 import com.marinetokio.service.TransferenciaService;
@@ -26,15 +26,15 @@ public class TransferenciaController {
 	TransferenciaService transferenciaService;
 	
 	@GetMapping("/listar")
-	public List<TransferenciaDto> listar(){
-		List<TransferenciaDto> transferencia = transferenciaService.listar();
-		return transferencia;
+	public List<Transferencia> listar(){
+		return transferenciaRepository.findAll();
 	}
 	
 	@PostMapping("/salvar")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Transferencia salvar(@RequestBody Transferencia transferencia, Long periodo) {
-		return transferenciaService.salvar(transferencia, periodo);
+	public Optional<Transferencia> salvar(@RequestBody Transferencia transferencia, Long periodo) {
+		transferenciaService.calculoTaxa(transferencia, periodo);
+		return transferenciaRepository.findById(transferencia.getId());
 	}
 	
 	

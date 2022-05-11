@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-public class TransferenciaDto {
+public class TransferenciaDTO {
 
 	@Id
 	protected Long id;

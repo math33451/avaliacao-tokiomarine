@@ -39,8 +39,16 @@ public class TransferenciaService {
 			}
 		}
 		if(transferencia.getTipoOperacao() == "C") {
-			if(periodo > 10 && periodo <= 20) {
+			if(periodo != 0 && periodo > 10 && periodo <= 20) {
 				transferencia.setTaxa(transferencia.getValor() * 0.082);
+			}else if(periodo > 20 && periodo <= 30){
+				transferencia.setTaxa(transferencia.getValor() * 0.069);
+			}else if(periodo > 30 && periodo <= 40) {
+				transferencia.setTaxa(transferencia.getValor() * 0.047);
+			}else if(periodo > 40){
+				transferencia.setTaxa(transferencia.getValor() * 0.017);
+			}else {
+				System.out.println("Erro: Taxa não aplicável");
 			}
 		}
 		if(transferencia.getTipoOperacao() == "D") {

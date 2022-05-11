@@ -1,8 +1,13 @@
 package com.marinetokio.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import com.marinetokio.DTO.TransferenciaDTO;
 import com.marinetokio.dto.TransferenciaDto;
 import com.marinetokio.model.Transferencia;
 import com.marinetokio.repository.TransferenciaRepository;
@@ -70,6 +75,12 @@ public class TransferenciaService {
 				}
 			}
 		}
+	}
+	
+	public List<TransferenciaDto> listar() {
+		List<Transferencia> transferencia = transferenciaRepository.findAll();
+		return new ArrayList<>(transferencia.stream()
+				.map(transfer -> new ModelMapper().map(transfer, TransferenciaDto.class)).collect(Collectors.toList()));
 	}
 	
 }

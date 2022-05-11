@@ -43,6 +43,14 @@ public class TransferenciaService {
 				transferencia.setTaxa(transferencia.getValor() * 0.082);
 			}
 		}
+		if(transferencia.getTipoOperacao() == "D") {
+			if(transferencia.getValor() <= 1000.00) {
+				transferencia.setTaxa((transferencia.getValor() * 0.03) + 3.00);
+			}
+			if(transferencia.getValor() > 1000.00 && transferencia.getValor() <= 2000.00) {
+				transferencia.setTaxa(12.00);
+			}
+		}
 	}
 	
 }

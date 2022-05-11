@@ -38,7 +38,11 @@ public class TransferenciaService {
 						+ "para até 10 dias.");
 			}
 		}
-
+		if(transferencia.getTipoOperacao() == "C") {
+			if(periodo > 10 && periodo <= 20) {
+				transferencia.setTaxa(transferencia.getValor() * 0.082);
+			}
+		}
 	}
 	
 }

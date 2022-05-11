@@ -23,7 +23,9 @@ public class TransferenciaService {
 		TransferenciaDto transferenciaDto = modelMapper.map(transferencia, TransferenciaDto.class);
 		transferencia = transferenciaRepository.getById(transferenciaDto.getId());
 		if(transferencia.getTipoOperacao() == "A") {
-			
+			if(transferencia.getDataAgendada() == transferencia.getDataTransferencia()){
+				transferencia.setTaxa((transferencia.getValor() * 0.03) + 3.00);
+			}
 		}
 	}
 	

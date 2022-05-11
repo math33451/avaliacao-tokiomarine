@@ -18,7 +18,8 @@ public class Transferencia {
 	private Long contaOrigem;
 	@Column(length = 6)
 	private Long contaDestino;
-	private Long valor;
+	private Double valor;
+	private Double taxa;
 	private Long dataTransferencia;
 	private Long dataAgendada;
 	private String tipoOperacao;

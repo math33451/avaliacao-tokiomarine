@@ -2,6 +2,8 @@ package com.marinetokio.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import lombok.Data;
@@ -13,15 +15,19 @@ import lombok.NoArgsConstructor;
 public class Transferencia {
 
 	@Id
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	protected Long id;
+	
 	@Column(length = 6)
-	private Long contaOrigem;
+	private String contaOrigem;
+	
 	@Column(length = 6)
-	private Long contaDestino;
+	private String contaDestino;
+	
 	private Double valor;
 	private Double taxa;
 	private Long dataTransferencia;
 	private Long dataAgendada;
-	private String tipoOperacao;
+	private Long tipoOperacao;
 	
 }

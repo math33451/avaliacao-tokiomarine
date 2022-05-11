@@ -33,8 +33,8 @@ public class TransferenciaController {
 	
 	@PostMapping("/salvar")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Transferencia salvar(@RequestBody Transferencia transferencia) {
-		return transferenciaService.salvar(transferencia);
+	public Transferencia salvar(@RequestBody Transferencia transferencia, Long periodo) {
+		return transferenciaService.salvar(transferencia, periodo);
 	}
 	
 	

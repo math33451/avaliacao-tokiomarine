@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class TransferenciaDto {
 
 	@Id
-	private Long id;
+	protected Long id;
 	@Column(length = 6)
 	private Long contaOrigem;
 	@Column(length = 6)
@@ -20,5 +20,5 @@ public class TransferenciaDto {
 	private Double taxa;
 	private Long dataTransferencia;
 	private Long dataAgendada;
-	private String tipoOperacao;
+	private Long tipoOperacao;
 }

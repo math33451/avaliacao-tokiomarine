@@ -21,26 +21,27 @@ public class TransferenciaService {
 
 	private static final ModelMapper modelMapper = new ModelMapper();
 	
-	public void calculoTaxa(Transferencia transferencia) {
+	public void calculoTaxa(Transferencia transferencia, Long periodo) {
 		TransferenciaDto transferenciaDto = modelMapper.map(transferencia, TransferenciaDto.class);
+		transferenciaRepository.save(transferencia);
 		transferencia = transferenciaRepository.getById(transferenciaDto.getId());
-		Long periodo = transferencia.getDataTransferencia() - transferencia.getDataAgendada();
-		if(transferencia.getTipoOperacao() == "A") {
-			if(transferencia.getDataAgendada() == transferencia.getDataTransferencia()){
+		periodo = transferencia.getDataTransferencia() - transferencia.getDataAgendada();
+		if(transferencia.getTipoOperacao() == 1) {
+			if(periodo == 0){
 				transferencia.setTaxa((transferencia.getValor() * 0.03) + 3.00);
 			}else {
 				System.out.println("Data inválida, precisa ser a mesma de hoje");
 			}
 		}
-		if(transferencia.getTipoOperacao() == "B") {
-			if(periodo <= 10) {
+		if(transferencia.getTipoOperacao() == 2) {
+			if(periodo <= 10 && periodo > 0) {
 				transferencia.setTaxa(12.00);
 			}else {
 				System.out.println("Data inválida, a transferência deve ser agendada"
-						+ "para até 10 dias.");
+						+ " para até 10 dias.");
 			}
 		}
-		if(transferencia.getTipoOperacao() == "C") {
+		if(transferencia.getTipoOperacao() == 3) {
 			if(periodo != 0 && periodo > 10 && periodo <= 20) {
 				transferencia.setTaxa(transferencia.getValor() * 0.082);
 			}else if(periodo > 20 && periodo <= 30){
@@ -53,7 +54,7 @@ public class TransferenciaService {
 				System.out.println("Erro: Taxa não aplicável");
 			}
 		}
-		if(transferencia.getTipoOperacao() == "D") {
+		if(transferencia.getTipoOperacao() == 4) {
 			if(transferencia.getValor() <= 1000.00) {
 				transferencia.setTaxa((transferencia.getValor() * 0.03) + 3.00);
 			}
@@ -82,8 +83,8 @@ public class TransferenciaService {
 				.map(transfer -> new ModelMapper().map(transfer, TransferenciaDto.class)).collect(Collectors.toList()));
 	}
 	
-	public Transferencia salvar(Transferencia transferencia) {
-		calculoTaxa(transferencia);
+	public Transferencia salvar(Transferencia transferencia, Long periodo) {
+		calculoTaxa(transferencia, periodo);
 		return transferenciaRepository.save(transferencia);
 	}
 	

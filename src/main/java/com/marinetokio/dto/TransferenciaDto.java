@@ -1,16 +1,14 @@
-package com.marinetokio.model;
+package com.marinetokio.dto;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-@Entity
 @Data
-public class Transferencia {
+public class TransferenciaDto {
 
 	@Id
 	private Long id;
@@ -22,5 +20,4 @@ public class Transferencia {
 	private Long dataTransferencia;
 	private Long dataAgendada;
 	private String tipoOperacao;
-	
 }

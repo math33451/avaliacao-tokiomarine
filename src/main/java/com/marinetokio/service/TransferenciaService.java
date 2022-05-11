@@ -14,8 +14,6 @@ import lombok.AllArgsConstructor;
 public class TransferenciaService {
 	
 	TransferenciaRepository transferenciaRepository;
-	
-	//private static final Logger logger = LogManager.getLogger(Transferencia.class);
 
 	private static final ModelMapper modelMapper = new ModelMapper();
 	

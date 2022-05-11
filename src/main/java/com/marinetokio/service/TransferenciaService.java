@@ -22,11 +22,23 @@ public class TransferenciaService {
 	public void calculoTaxa(Transferencia transferencia) {
 		TransferenciaDto transferenciaDto = modelMapper.map(transferencia, TransferenciaDto.class);
 		transferencia = transferenciaRepository.getById(transferenciaDto.getId());
+		Long periodo = transferencia.getDataTransferencia() - transferencia.getDataAgendada();
 		if(transferencia.getTipoOperacao() == "A") {
 			if(transferencia.getDataAgendada() == transferencia.getDataTransferencia()){
 				transferencia.setTaxa((transferencia.getValor() * 0.03) + 3.00);
+			}else {
+				System.out.println("Data inválida, precisa ser a mesma de hoje");
 			}
 		}
+		if(transferencia.getTipoOperacao() == "B") {
+			if(periodo <= 10) {
+				transferencia.setTaxa(12.00);
+			}else {
+				System.out.println("Data inválida, a transferência deve ser agendada"
+						+ "para até 10 dias.");
+			}
+		}
+
 	}
 	
 }

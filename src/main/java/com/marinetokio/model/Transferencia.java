@@ -15,8 +15,8 @@ import lombok.NoArgsConstructor;
 public class Transferencia {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	protected Long id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 	
 	@Column(length = 6)
 	private String contaOrigem;

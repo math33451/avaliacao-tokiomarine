@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class TransferenciaDTO {
 
 	@Id
-	protected Long id;
+	private Long id;
 	@Column(length = 6)
 	private Long contaOrigem;
 	@Column(length = 6)

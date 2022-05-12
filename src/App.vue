@@ -1,25 +1,20 @@
 <template>
-  <HelloWorld msg="Sitema de Transferências"/>
+  <HelloWorld/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import HelloWorld from './views/HelloWorld'
+
 
 export default {
-  name: 'App',
   components: {
     HelloWorld
   }
-}
+
+ }
+
+
+
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: whitesmoke;
-  background-color: black;
-}
-</style>

@@ -2,10 +2,10 @@ package com.marinetokio.service;
 
 import java.util.List;
 
-import org.modelmapper.ModelMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import com.marinetokio.dto.TransferenciaDTO;
 import com.marinetokio.model.Transferencia;
 import com.marinetokio.repository.TransferenciaRepository;
 
@@ -17,19 +17,17 @@ public class TransferenciaService {
 	
 	TransferenciaRepository transferenciaRepository;
 	
-	private static final ModelMapper modelMapper = new ModelMapper();
+	private static final Logger logger = LogManager.getLogger(Transferencia.class);
+
 	
 	public void calculoTaxa(Transferencia transferencia, Long periodo) {
-		TransferenciaDTO transferenciaDTO = modelMapper.map(transferencia, TransferenciaDTO.class);
-		transferenciaRepository.save(transferencia);
-		transferencia = transferenciaRepository.getById(transferenciaDTO.getId());
 		periodo = transferencia.getDataTransferencia() - transferencia.getDataAgendada();
 		if(transferencia.getTipoOperacao().contains("A")) {
 			if(periodo == 0){
 				transferencia.setTaxa((transferencia.getValor() * 0.03) + 3.00);
 				transferenciaRepository.save(transferencia);
 			}else {
-				System.out.println("A data de transferência é inválida, precisa ser igual ao dia de hoje.");
+				logger.error("A data de transferência é inválida, precisa ser igual ao dia de hoje.");
 			}
 		}
 		if(transferencia.getTipoOperacao().contains("B")){
@@ -37,9 +35,9 @@ public class TransferenciaService {
 				transferencia.setTaxa(12.00);
 				transferenciaRepository.save(transferencia);
 			}else if(periodo == 0) {
-				System.out.println("A data de transferência é inválida, não pode ser a data de hoje.");
+				logger.error("A data de transferência é inválida, não pode ser a data de hoje.");
 			}else {
-				System.out.println("A data de transferência é inválida, precisa ser para até 10 dias.");
+				logger.error("A data de transferência é inválida, precisa ser para até 10 dias.");
 			}
 		}
 		if(transferencia.getTipoOperacao().contains("C")) {
@@ -56,7 +54,7 @@ public class TransferenciaService {
 				transferencia.setTaxa(transferencia.getValor() * 0.017);
 				transferenciaRepository.save(transferencia);
 			}else {
-				System.out.println("Taxa não aplicável, use outro tipo de operação.");
+				logger.error("Taxa não aplicável, use outro tipo de operação.");
 			}
 		}
 		if(transferencia.getTipoOperacao().contains("D")) {
@@ -65,14 +63,14 @@ public class TransferenciaService {
 				transferencia.setTaxa((transferencia.getValor() * 0.03) + 3.00);
 				transferenciaRepository.save(transferencia);
 			}else {
-				System.out.println("A transferência é inválida, precisa ser para o dia de hoje ou valor superior a 1000.00");
+				logger.error("A transferência é inválida, precisa ser para o dia de hoje ou valor superior a 1000.00");
 			}
 			}
 			if(transferencia.getValor() > 1000.00 && transferencia.getValor() <= 2000.00) {
 				transferencia.setTaxa(12.00);
 				transferenciaRepository.save(transferencia);
 			}else {
-				System.out.println("O valor é inválido, precisa ser até 2.000");
+				logger.error("O valor é inválido, precisa ser até 2.000");
 			}
 			if(transferencia.getValor() > 2000.00) {
 				if(periodo != 0 && periodo > 10 && periodo <= 20) {
@@ -88,7 +86,7 @@ public class TransferenciaService {
 					transferencia.setTaxa(transferencia.getValor() * 0.017);
 					transferenciaRepository.save(transferencia);
 				}else {
-					System.out.println("Taxa não aplicável, verifique data e valor e tente novamente.");
+					logger.error("Taxa não aplicável, verifique data e valor e tente novamente.");
 				}
 			}
 		}

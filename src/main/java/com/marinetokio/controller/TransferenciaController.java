@@ -19,18 +19,18 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("api/transferencia")
+@RequestMapping("api")
 public class TransferenciaController {
 	
 	TransferenciaRepository transferenciaRepository;
 	TransferenciaService transferenciaService;
 	
-	@GetMapping("/listar")
+	@GetMapping("/transferencias")
 	public List<Transferencia> listar(){
 		return transferenciaRepository.findAll();
 	}
 	
-	@PostMapping("/salvar")
+	@PostMapping("/transferencia")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Optional<Transferencia> salvar(@RequestBody Transferencia transferencia, Long periodo) {
 		transferenciaService.calculoTaxa(transferencia, periodo);

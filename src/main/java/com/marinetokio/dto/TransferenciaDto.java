@@ -12,7 +12,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class TransferenciaDTO {
 
-	@Id @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id 
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@Column(length = 6)
 	private Long contaOrigem;

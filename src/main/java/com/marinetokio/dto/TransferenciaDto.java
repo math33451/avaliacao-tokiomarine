@@ -1,6 +1,8 @@
 package com.marinetokio.dto;
 
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import lombok.Data;
@@ -10,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class TransferenciaDTO {
 
-	@Id
+	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@Column(length = 6)
 	private Long contaOrigem;
@@ -20,5 +22,5 @@ public class TransferenciaDTO {
 	private Double taxa;
 	private Long dataTransferencia;
 	private Long dataAgendada;
-	private Long tipoOperacao;
+	private String tipoOperacao;
 }

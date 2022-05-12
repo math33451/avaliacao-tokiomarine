@@ -24,7 +24,7 @@ public class TransferenciaService {
 		transferenciaRepository.save(transferencia);
 		transferencia = transferenciaRepository.getById(transferenciaDTO.getId());
 		periodo = transferencia.getDataTransferencia() - transferencia.getDataAgendada();
-		if(transferencia.getTipoOperacao() == 1) {
+		if(transferencia.getTipoOperacao().contains("A")) {
 			if(periodo == 0){
 				transferencia.setTaxa((transferencia.getValor() * 0.03) + 3.00);
 				transferenciaRepository.save(transferencia);
@@ -32,7 +32,7 @@ public class TransferenciaService {
 				System.out.println("A data de transferência é inválida, precisa ser igual ao dia de hoje.");
 			}
 		}
-		if(transferencia.getTipoOperacao() == 2) {
+		if(transferencia.getTipoOperacao().contains("B")){
 			if(periodo <= 10 && periodo > 0) {
 				transferencia.setTaxa(12.00);
 				transferenciaRepository.save(transferencia);
@@ -42,7 +42,7 @@ public class TransferenciaService {
 				System.out.println("A data de transferência é inválida, precisa ser para até 10 dias.");
 			}
 		}
-		if(transferencia.getTipoOperacao() == 3) {
+		if(transferencia.getTipoOperacao().contains("C")) {
 			if(periodo != 0 && periodo > 10 && periodo <= 20) {
 				transferencia.setTaxa(transferencia.getValor() * 0.082);
 				transferenciaRepository.save(transferencia);
@@ -59,7 +59,7 @@ public class TransferenciaService {
 				System.out.println("Taxa não aplicável, use outro tipo de operação.");
 			}
 		}
-		if(transferencia.getTipoOperacao() == 4) {
+		if(transferencia.getTipoOperacao().contains("D")) {
 			if(transferencia.getValor() <= 1000.00) {
 				if(periodo == 0) {
 				transferencia.setTaxa((transferencia.getValor() * 0.03) + 3.00);

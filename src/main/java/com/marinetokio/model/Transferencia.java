@@ -28,6 +28,6 @@ public class Transferencia {
 	private Double taxa;
 	private Long dataTransferencia;
 	private Long dataAgendada;
-	private Long tipoOperacao;
+	private String tipoOperacao;
 	
 }

@@ -10,6 +10,7 @@
     <div class="bg-success">
     <h1 class="text-center">Sistema de Transferências</h1>
     </div>
+
     <form @submit.prevent="salvar">
   <div class="form-group row">
     <label for="input" class="col-sm-2 col-form-label">Conta de Origem</label>
@@ -58,6 +59,33 @@
     </div>
   </div>
 </form>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Origem</th>
+      <th scope="col">Destino</th>
+      <th scope="col">Valor</th>
+      <th scope="col">Taxa</th>
+      <th scope="col">Data Agendada</th>
+      <th scope="col">Data da Transferencia</th>
+      <th scope="col">Tipo de Operação</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="transferencia of transferencias" :key="transferencia.id">
+      <th scope="row">{{ transferencia.id }}</th>
+      <td>{{ transferencia.contaOrigem }}</td>
+      <td>{{ transferencia.contaDestino }}</td>
+      <td>{{ transferencia.valor }}</td>
+      <td>{{ transferencia.taxa }}</td>
+      <td>{{ transferencia.dataAgendada }}</td>
+      <td>{{ transferencia.dataTransferencia }}</td>
+      <td>{{ transferencia.tipoOperacao }}</td>
+    </tr>
+  </tbody>
+</table>
   </body>
 </html>
 </template>
@@ -84,10 +112,7 @@
   },
 
   mounted(){
-    Transferencia.listar().then(resposta => {
-      console.log(resposta.data)
-      this.transferencias = resposta.data
-    })
+    this.listar()
   },
 
   methods:{
@@ -103,7 +128,12 @@
      Transferencia.salvar(this.transferencia).then(resposta => {
        this.transferencia = {}
        alert('Transferencia salva com sucesso!')
-       resposta
+       this.listar(resposta)
+     }).catch( e => {
+       console.log(e.response.data.error)
+       alert('ERRO! Verifique os campos e tente novamente \n Operações tipo A precisam ser realizadas no dia de hoje. \n Operações tipo B precisam ser em até 10 dias. \n Operações tipo C precisam ser após 10 dias. \n Operações tipo D são para optar pelas taxas de acordo com o valor.')
+       this.transferencia = {}
+       
      })
 
     }

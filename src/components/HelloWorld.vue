@@ -3,27 +3,28 @@
     <h1>{{ msg }}</h1>
     <li>
     <p>Conta Origem</p>
-    <input type="text" name="contaOrigem" size="30" /> 
+    <input type="text" name="contaOrigem" size="10" /> 
     </li>
     <li>
     <p>Conta Destino</p>
-    <input type="text" name="contaDestino" size="30" /> 
+    <input type="text" name="contaDestino" size="10" /> 
     </li>
     <li>
     <p>Valor</p>
-    <input type="text" name="valor" size="30" /> 
+    <input type="text" name="valor" size="10" /> 
     </li>
     <li>
     <p>Dia da Transferência</p>
-    <input type="text" name="dataTransferência" size="30" /> 
+    <input type="text" name="dataTransferência" size="10" /> 
     </li>
     <li>
     <p>Dia de Hoje</p>
-    <input type="text" name="dataAgendada" size="30" /> 
+    <input type="text" name="dataAgendada" size="10" /> 
     </li>
     <li>
-    <p>Tipo de Operação (1, 2, 3 ou 4)</p>
-    <input type="text" name="dataAgendada" size="30" /> 
+    <p>Tipo de Operação</p>
+    <p> (1, 2, 3 ou 4)</p>
+    <input type="text" name="dataAgendada" size="10" /> 
     </li>
     <div>
       <input type="submit" value="Transferir">
@@ -60,18 +61,17 @@ h3 {
   margin: 40px 0 0;
 }
 ul {
-  padding: 10px;
-  border: 2px solid black;
+  padding: 0px;
+  border: 2px solid white;
   display: flex;
+}
+input{
+  font-size: 11px;
 }
 li {
   display: inline-block;
   margin: 0 10px;
-  border-left: 1.5px solid black;
-  border-right: 1.5px solid black;
-}
-a {
-  color: #42b983;
+  font-size: 11px;
 }
 div{
   margin: 10px;

@@ -5,11 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Sistema de Transferências</title>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/transferencias">Listar Transferências</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-    </button></nav>
   </head>
   <body>
     <div class="bg-success">
@@ -47,8 +42,8 @@
     </div>
   </div>
     <div class="form-group">
-      <label for="exampleFormControlSelect1">Tipo de Operação</label>
-    <div class="col-sm-5">
+    <label for="exampleFormControlSelect1">Tipo de Operação</label>
+    <div class="col-sm-3">
     <select class="form-control" id="exampleFormControlSelect1" v-model="transferencia.tipoOperacao">
       <option>A (Transferências para hoje)</option>
       <option>B (Transferências para até 10 dias)</option>
@@ -57,7 +52,7 @@
     </select>
     </div>
   </div>
-  <div class="form-group row">
+  <div class="form-group">
     <div class="col-sm-10">
       <button type="submit" class="btn btn-primary">Salvar</button>
     </div>
@@ -71,6 +66,7 @@
     import Transferencia from '/src/services/transferencias'
 
     export default {
+          name: 'MyHome',
           data(){
     return{
       transferencia: {

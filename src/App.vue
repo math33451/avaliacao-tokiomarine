@@ -1,16 +1,16 @@
 <template>
-  <HelloWorld/>
+  <Home/>
 </template>
 
 <script>
 
-import HelloWorld from './views/HelloWorld'
+import Home from './components/Home.vue'
 
 
 export default {
   components: {
-    HelloWorld
-  }
+    Home
+}
 
  }
 
